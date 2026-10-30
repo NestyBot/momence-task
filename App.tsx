@@ -2,11 +2,19 @@ import type { JSX } from "react";
 import { useState } from "react";
 import { exchangeRates, type ExchangeRate } from "./mockData";
 
-function CountryCodeRow({ code }: { code: string }) {
+function CountryCodeRow({
+  code,
+  onSelect,
+}: {
+  code: string
+  onSelect: () => void
+}) {
   return (
     <tr>
       <th colSpan={2}>
-        {code}
+        <button type="button" onClick={onSelect}>
+          {code}
+        </button>
       </th>
     </tr>
   );
@@ -15,9 +23,11 @@ function CountryCodeRow({ code }: { code: string }) {
 function ExchangeRatesTable({
   exchangeRates,
   filterText,
+  onRateChange,
 }: {
-  exchangeRates: ExchangeRate[];
-  filterText: string;
+  exchangeRates: ExchangeRate[]
+  filterText: string
+  onRateChange: (value: ExchangeRate) => void
 }) {
   const rows: JSX.Element[] = [];
 
@@ -28,6 +38,7 @@ function ExchangeRatesTable({
     rows.push(
       <CountryCodeRow
         code={rate.code}
+        onSelect={() => onRateChange(rate)}
         key={rate.code} />
     );
   });
@@ -63,7 +74,13 @@ function SearchBar({
   );
 }
 
-function FilterableExchangeRatesTable({ exchangeRates }: { exchangeRates: ExchangeRate[] }) {
+function FilterableExchangeRatesTable({
+  exchangeRates,
+  onRateChange
+}: {
+  exchangeRates: ExchangeRate[]
+  onRateChange: (value : ExchangeRate) => void
+}) {
   const [filterText, setFilterText] = useState('');
   return (
     <div>
@@ -72,7 +89,8 @@ function FilterableExchangeRatesTable({ exchangeRates }: { exchangeRates: Exchan
         onFilterTextChange={setFilterText}/>
       <ExchangeRatesTable
         exchangeRates={exchangeRates}
-        filterText={filterText}/>
+        filterText={filterText}
+        onRateChange={onRateChange}/>
     </div>
   );
 }
@@ -108,21 +126,27 @@ function InputAmount({
   )
 }
 
-function OutputAmount({ amount }: { amount: number }){
+function convertFromCzk(czk: number, rate: ExchangeRate): number {
+  return (czk * rate.amount) / rate.rate;
+}
+
+function OutputAmount({ amount, rate }: { amount: number; rate: ExchangeRate }){
+  const formatted = Number(convertFromCzk(amount, rate).toFixed(3));
   return (
     <div>
-      <p>{amount}</p>
+      <p>{formatted} {rate.code}</p>
     </div>
   )
 }
 
 export default function App() {
   const [amount, setAmount] = useState(0);
+  const [rate, setRate] = useState(exchangeRates[0])
   return (
     <div>
       <InputAmount amount={amount} onAmountChange={setAmount}/>
-      <OutputAmount amount={amount} />
-      <FilterableExchangeRatesTable exchangeRates={exchangeRates} />
+      <OutputAmount amount={amount} rate={rate} />
+      <FilterableExchangeRatesTable exchangeRates={exchangeRates} onRateChange={setRate} />
     </div>
   );
 }
