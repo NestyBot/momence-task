@@ -72,9 +72,9 @@ export function RatesTable({ rates, date }: { rates: ExchangeRate[]; date: strin
                 <BodyRow key={rate.code}>
                   <Cell>{rate.country}</Cell>
                   <Cell>{rate.currency}</Cell>
-                  <Cell><Code>{rate.code}</Code></Cell>
-                  <Cell $numeric>{rate.amount}</Cell>
-                  <Cell $numeric>{rateFormat.format(rate.rate)}</Cell>
+                  <Cell translate="no"><Code>{rate.code}</Code></Cell>
+                  <Cell $numeric translate="no">{rate.amount}</Cell>
+                  <Cell $numeric translate="no">{rateFormat.format(rate.rate)}</Cell>
                 </BodyRow>
               ))}
             </tbody>

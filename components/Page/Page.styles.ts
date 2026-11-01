@@ -9,6 +9,12 @@ export const Page = styled.main`
   padding: ${({ theme }) => theme.spacing(4)};
 `;
 
+export const Title = styled.h1`
+  margin: 0;
+  font-size: 1.75rem;
+  text-align: center;
+`;
+
 export const Caption = styled.p`
   margin: 0;
   color: ${({ theme }) => theme.colors.textMuted};

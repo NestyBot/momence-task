@@ -32,7 +32,7 @@ export function Converter({ rates }: { rates: ExchangeRate[] }) {
           amount={czk}
           onAmountChange={(value) => setEdited({ side: "czk", value })}
         >
-          <UnitLabel htmlFor="amount-czk">CZK</UnitLabel>
+          <UnitLabel htmlFor="amount-czk" translate="no">CZK</UnitLabel>
         </AmountInput>
         <EqualsIcon />
         <AmountInput
@@ -51,7 +51,7 @@ export function Converter({ rates }: { rates: ExchangeRate[] }) {
           />
         </AmountInput>
       </Row>
-      <Caption>
+      <Caption translate="no">
         {rate.amount} {rate.code} = {rate.rate} CZK
       </Caption>
     </>

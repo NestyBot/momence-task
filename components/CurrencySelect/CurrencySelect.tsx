@@ -91,6 +91,7 @@ export function CurrencySelect({
         aria-expanded={open}
         aria-label={`Currency: ${selected.code} (${selected.country} ${selected.currency})`}
         onClick={() => (open ? close() : setOpen(true))}
+        translate="no"
       >
         {selected.code}
         <Chevron $open={open} viewBox="0 0 24 24" aria-hidden="true">
@@ -137,7 +138,7 @@ export function CurrencySelect({
                 onMouseEnter={() => setActiveIndex(i)}
                 onClick={() => choose(rate)}
               >
-                {rate.code} – {rate.country} {rate.currency}
+                <span translate="no">{rate.code}</span> – {rate.country} {rate.currency}
               </Option>
             ))}
           </List>

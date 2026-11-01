@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useExchangeRates } from "./hooks/useExchangeRates";
 import { Converter } from "./components/Converter/Converter";
 import { RatesTable } from "./components/RatesTable/RatesTable";
-import { Caption, Page } from "./components/Page/Page.styles";
+import { Caption, Page, Title } from "./components/Page/Page.styles";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +24,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Page>
+        <Title>Czech koruna converter</Title>
         <Rates />
       </Page>
     </QueryClientProvider>
