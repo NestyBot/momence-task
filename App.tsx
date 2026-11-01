@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useExchangeRates } from "./hooks/useExchangeRates";
 import { Converter } from "./components/Converter/Converter";
+import { RatesTable } from "./components/RatesTable/RatesTable";
 import { Caption, Page } from "./components/Page/Page.styles";
 
 const queryClient = new QueryClient();
@@ -14,7 +15,7 @@ function Rates() {
   return (
     <>
       <Converter rates={data.rates} />
-      <Caption>CNB exchange rates from {data.date}</Caption>
+      <RatesTable rates={data.rates} date={data.date} />
     </>
   );
 }

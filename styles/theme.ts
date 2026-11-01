@@ -19,6 +19,7 @@ export const theme = {
     background: palette.white,
     surface: palette.gray50,
     border: palette.gray300,
+    gridLine: palette.gray200,
     primary: palette.indigo600,
     primaryHover: palette.indigo700,
     // Highlights: text selection, focus rings, hovered/selected rows
