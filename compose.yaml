@@ -1,0 +1,6 @@
+services:
+  momence-task:
+    image: ${REGISTRY}/momence-task:${VERSION:-latest}
+    ports:
+      - "${PORT:-3000}:3000"
+    restart: unless-stopped
