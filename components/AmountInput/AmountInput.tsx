@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { roundAmount } from "../../utils/currency";
+import { MAX_AMOUNT, parseAmount } from "../../utils/currency";
 import { Input, Wrapper } from "./AmountInput.styles";
 
 export function AmountInput({
@@ -25,14 +25,18 @@ export function AmountInput({
         inputMode="decimal"
         step="0.01"
         min="0"
+        max={MAX_AMOUNT}
         placeholder="0"
         value={amount === 0 ? '' : amount}
         onChange={(e) => {
+          const parsed = parseAmount(e.target.value, amount);
+          // Too large: skip the update so React restores the previous value.
+          if (parsed === null) return;
           const value = e.target.value.replace(/^0+(?=\d)/, '');
           if (value !== e.target.value) {
             e.target.value = value;
           }
-          onAmountChange(roundAmount(Number(value)));
+          onAmountChange(parsed);
         }}
       />
       {children}
