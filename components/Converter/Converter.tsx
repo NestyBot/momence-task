@@ -5,6 +5,7 @@ import { AmountInput } from "../AmountInput/AmountInput";
 import { UnitLabel } from "../AmountInput/AmountInput.styles";
 import { CurrencySelect } from "../CurrencySelect/CurrencySelect";
 import { EqualsIcon } from "../EqualsIcon/EqualsIcon";
+import { Caption } from "../Page/Page.styles";
 import { Row } from "./Converter.styles";
 
 // Only the side the user last typed in is stored, the other one is derived.
@@ -23,31 +24,36 @@ export function Converter({ rates }: { rates: ExchangeRate[] }) {
     : roundAmount(convertFromCzk(edited.value, rate));
 
   return (
-    <Row>
-      <AmountInput
-        id="amount-czk"
-        label="Amount in CZK"
-        amount={czk}
-        onAmountChange={(value) => setEdited({ side: "czk", value })}
-      >
-        <UnitLabel htmlFor="amount-czk">CZK</UnitLabel>
-      </AmountInput>
-      <EqualsIcon />
-      <AmountInput
-        id="amount-foreign"
-        label={`Amount in ${rate.code}`}
-        amount={foreign}
-        onAmountChange={(value) => setEdited({ side: "foreign", value })}
-      >
-        <CurrencySelect
-          rates={rates}
-          selected={rate}
-          onSelect={(value) => {
-            setRate(value);
-            document.getElementById("amount-foreign")?.focus();
-          }}
-        />
-      </AmountInput>
-    </Row>
+    <>
+      <Row>
+        <AmountInput
+          id="amount-czk"
+          label="Amount in CZK"
+          amount={czk}
+          onAmountChange={(value) => setEdited({ side: "czk", value })}
+        >
+          <UnitLabel htmlFor="amount-czk">CZK</UnitLabel>
+        </AmountInput>
+        <EqualsIcon />
+        <AmountInput
+          id="amount-foreign"
+          label={`Amount in ${rate.code}`}
+          amount={foreign}
+          onAmountChange={(value) => setEdited({ side: "foreign", value })}
+        >
+          <CurrencySelect
+            rates={rates}
+            selected={rate}
+            onSelect={(value) => {
+              setRate(value);
+              document.getElementById("amount-foreign")?.focus();
+            }}
+          />
+        </AmountInput>
+      </Row>
+      <Caption>
+        {rate.amount} {rate.code} = {rate.rate} CZK
+      </Caption>
+    </>
   );
 }
