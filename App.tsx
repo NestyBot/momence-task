@@ -3,17 +3,17 @@ import { useState } from "react";
 import { exchangeRates, type ExchangeRate } from "./mockData";
 
 function CountryCodeRow({
-  code,
+  rate,
   onSelect,
 }: {
-  code: string
+  rate: ExchangeRate
   onSelect: () => void
 }) {
   return (
     <tr>
       <th colSpan={2}>
         <button type="button" onClick={onSelect}>
-          {code}
+          {rate.code} ({rate.country} {rate.currency})
         </button>
       </th>
     </tr>
@@ -31,13 +31,18 @@ function ExchangeRatesTable({
 }) {
   const rows: JSX.Element[] = [];
 
+  const query = filterText.toLowerCase();
+
   exchangeRates.forEach((rate) => {
-    if (rate.code.toLowerCase().indexOf(filterText.toLowerCase()) === -1){
+    const matches = [rate.code, rate.country, rate.currency].some(
+      (field) => field.toLowerCase().includes(query)
+    );
+    if (!matches){
       return
     }
     rows.push(
       <CountryCodeRow
-        code={rate.code}
+        rate={rate}
         onSelect={() => onRateChange(rate)}
         key={rate.code} />
     );
