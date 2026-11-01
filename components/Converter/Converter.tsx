@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ExchangeRate } from "../../mockData";
+import type { ExchangeRate } from "../../utils/exchangeRates";
 import { convertFromCzk, convertToCzk, roundAmount } from "../../utils/currency";
 import { AmountInput } from "../AmountInput/AmountInput";
 import { UnitLabel } from "../AmountInput/AmountInput.styles";

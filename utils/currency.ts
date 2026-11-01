@@ -1,4 +1,4 @@
-import type { ExchangeRate } from "../mockData";
+import type { ExchangeRate } from "./exchangeRates";
 
 export function convertFromCzk(czk: number, rate: ExchangeRate): number {
   return (czk * rate.amount) / rate.rate;

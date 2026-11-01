@@ -1,10 +1,4 @@
-export type ExchangeRate = {
-  country: string;
-  currency: string;
-  amount: number;
-  code: string;
-  rate: number;
-};
+import type { ExchangeRate } from "./utils/exchangeRates";
 
 // CNB exchange rates, 29 Oct 2026 #208
 export const exchangeRates: ExchangeRate[] = [

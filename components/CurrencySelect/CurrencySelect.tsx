@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
-import type { ExchangeRate } from "../../mockData";
+import type { ExchangeRate } from "../../utils/exchangeRates";
 import { matchesQuery } from "../../utils/currency";
 import {
   Chevron,
